@@ -56,3 +56,10 @@ def reviews_statistic(df):
     reviews = reviews.apply(lambda x: round(x, 2))
     reviews.index.name = 'Estatísticas'
     return reviews
+
+def read_text(text_df):
+    text = text_df
+    chunk_size = 90 
+    chunks = [text[i:i+chunk_size] for i in range(0, len(text), chunk_size)]
+    return chunks
+    
