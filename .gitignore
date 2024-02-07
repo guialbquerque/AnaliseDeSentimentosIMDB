@@ -3,3 +3,4 @@ data/
 poetry.lock
 pyproject.toml
 .vscode
+src/modeling/__pycache__/bag_of_words.cpython-312.pyc
