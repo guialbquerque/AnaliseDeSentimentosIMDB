@@ -11,19 +11,20 @@ from wordcloud import WordCloud
 
 
 
-def classification_text_bow(df, column_text, column_sentiment, model):
+def classification_text_bow(df, column_text, column_sentiment, model_ml):
+  
 
-    vector = CountVectorizer(max_features = 100, lowercase = True)
-    BagOfWords = vector.fit_transform(df[column_text])
-    train_X, test_X, train_y, test_y = train_test_split(BagOfWords,
+  vector = CountVectorizer(max_features = 100, lowercase = True)
+  BagOfWords = vector.fit_transform(df[column_text])
+  train_X, test_X, train_y, test_y = train_test_split(BagOfWords,
                                                         df[column_sentiment],
                                                         test_size = 0.33,
                                                         random_state = 42)
-    model = model
-    if model == GaussianNB() or model == MultinomialNB():
-      model.fit(train_X.todense(), train_y)
-      Accuracy = model.score(test_X.todense(), test_y)
-    else:
-      model.fit(train_X, train_y)
-      Accuracy = model.score(test_X, test_y)
-    return Accuracy
+  model = model_ml
+  if isinstance(model, (GaussianNB, MultinomialNB)):
+    model.fit(train_X.toarray(), train_y)
+    Accuracy = model.score(test_X.toarray(), test_y)
+  else:
+    model.fit(train_X, train_y)
+    Accuracy = model.score(test_X, test_y)
+  return Accuracy
