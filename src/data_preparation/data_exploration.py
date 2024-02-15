@@ -29,7 +29,8 @@ def distribuition_plot(df, column):
     plt.xlabel('Sentimento')
     plt.ylabel('Contagem')
     plt.title('Avaliação do público', fontsize = 14, fontweight = 'bold')
-    plt.legend(labels = ['Negativo', 'Positivo'])
+    plt.legend(labels = ['Negativo', 'Positivo'], bbox_to_anchor=(1, 1), loc = 'upper left')
+    plt.tight_layout()
     plt.savefig(f"/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/{column}_distribuition.png")
     plt.show()
 
