@@ -5,6 +5,8 @@ from nltk import tokenize
 import pandas as pd
 import seaborn as sns
 nltk.download('stopwords')
+from string import punctuation
+from nltk.stem import PorterStemmer
 
 def positive_words_cloud(text, column_text):
 
@@ -15,7 +17,7 @@ def positive_words_cloud(text, column_text):
     fig = plt.figure(figsize = (12,8))
     plt.imshow(word_cloud, interpolation = 'bilinear')
     plt.axis('off')
-    plt.savefig('/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/positive_words_cloud.png')
+    plt.savefig(f'/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/{column_text}_positive_words_cloud.png')
     plt.show()
     
 def negative_words_cloud(text, column_text):
@@ -27,7 +29,7 @@ def negative_words_cloud(text, column_text):
     fig = plt.figure(figsize = (12,8))
     plt.imshow(word_cloud, interpolation = 'bilinear')
     plt.axis('off')
-    plt.savefig('/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/negative_words_cloud.png')
+    plt.savefig(f'/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/{column_text}_negative_words_cloud.png')
     plt.show()
     
 
@@ -61,4 +63,55 @@ def remove_stop_words(df, df_column):
         new_texts.append(' '.join(news))
     return new_texts
         
-            
+def remove_punctuation(df, df_column):
+    punctuationn = list()
+    for p in punctuation:
+        punctuationn.append(p)
+    stop_words = nltk.corpus.stopwords.words('english')
+    total_to_remove = stop_words + punctuationn
+    new_texts = list()
+    for opinion in df[df_column]:
+        news = list()
+        word_texts = tokenize.WordPunctTokenizer().tokenize(opinion)
+        for word in word_texts:
+            if word not in total_to_remove:
+                news.append(word)
+        new_texts.append(' '.join(news))
+    return new_texts
+
+def normalize_corpus(df, df_column):
+    punctuationn = list()
+    for p in punctuation:
+        punctuationn.append(p)
+    stop_words = nltk.corpus.stopwords.words('english')
+    total_to_remove = stop_words + punctuationn
+    new_texts = list()
+    for opinion in df[df_column]:
+        opinion = opinion.lower()
+        news = list()
+        word_texts = tokenize.WordPunctTokenizer().tokenize(opinion)
+        for word in word_texts:
+            if word not in total_to_remove:
+                news.append(word)
+        new_texts.append(' '.join(news))
+    return new_texts
+
+def stemm_corpus(df, df_column): 
+    ps = PorterStemmer()
+    punctuationn = list()
+    for p in punctuation:
+        punctuationn.append(p)
+    stop_words = nltk.corpus.stopwords.words('english')
+    total_to_remove = stop_words + punctuationn
+    new_texts = list()
+    for opinion in df[df_column]:
+        opinion = opinion.lower()
+        news = list()
+        word_texts = tokenize.WordPunctTokenizer().tokenize(opinion)
+        for word in word_texts:
+            if word not in total_to_remove:
+                news.append(ps.stem(word))
+        new_texts.append(' '.join(news))
+    return new_texts
+        
+        
