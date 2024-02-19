@@ -20,4 +20,4 @@ def get_roc_curve_pr(df, column_text, column_sentiment, model):
         ml_model.fit(train_X, train_y)
         model_predict = ml_model.predict(test_X)
         model_predict_prob = ml_model.predict_proba(test_X)
-    return test_y, model_predict, model_predict_prob
+    return test_y, model_predict, model_predict_prob, ml_model
