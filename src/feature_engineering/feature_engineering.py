@@ -8,28 +8,28 @@ nltk.download('stopwords')
 from string import punctuation
 from nltk.stem import PorterStemmer
 
-def positive_words_cloud(text, column_text):
+def positive_words_cloud(text, column_text, figure_name):
 
     positive = text.query("Sentiment == 1")
     all_words = ' '.join([text for text in positive[column_text]])
     model_cloud = WordCloud(width = 800, height = 500, max_font_size = 110, collocations = False)
     word_cloud = model_cloud.generate(all_words)
-    fig = plt.figure(figsize = (12,8))
+    fig = plt.figure(figsize = (10,8))
     plt.imshow(word_cloud, interpolation = 'bilinear')
     plt.axis('off')
-    plt.savefig(f'/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/{column_text}_positive_words_cloud.png')
+    plt.savefig(f'/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/{figure_name}_positive_words_cloud.png')
     plt.show()
     
-def negative_words_cloud(text, column_text):
+def negative_words_cloud(text, column_text, figure_name):
 
     positive = text.query("Sentiment == 0")
     all_words = ' '.join([text for text in positive[column_text]])
     model_cloud = WordCloud(width = 800, height = 500, max_font_size = 110, collocations = False)
     word_cloud = model_cloud.generate(all_words)
-    fig = plt.figure(figsize = (12,8))
+    fig = plt.figure(figsize = (10,8))
     plt.imshow(word_cloud, interpolation = 'bilinear')
     plt.axis('off')
-    plt.savefig(f'/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/{column_text}_negative_words_cloud.png')
+    plt.savefig(f'/home/guilherme/AIEnvironment/SentimentAnalysis/reports/figures/{figure_name}_negative_words_cloud.png')
     plt.show()
     
 
