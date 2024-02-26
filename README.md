@@ -111,6 +111,16 @@ Considerando o contexto de classificação de textos, os resultados obtidos para
 
 <img src="https://github.com/guialbquerque/AnaliseDeSentimentosIMDB/blob/main/reports/figures/negative_cloud_tfidf.png" width=50% height=50%>
 
+#### Análise das WordClouds
+
+As nuvens de palavras acima mostram de forma satisfatória que as palavras mais relevantes para avaliações positivas e negativas estão bem construídas, sendo as palavras encontradas em sua forma raiz, base, após processo de stemming.
+
+Para mais detalhes sobre todos os resultados obtidos:
+- [Bag of Words](https://github.com/guialbquerque/AnaliseDeSentimentosIMDB/blob/main/notebooks/modeling/models_bow.ipynb)
+- [Tratamento dos textos](https://github.com/guialbquerque/AnaliseDeSentimentosIMDB/tree/main/notebooks/preprocessing)
+- [Resultados após tratamentos](https://github.com/guialbquerque/AnaliseDeSentimentosIMDB/blob/main/notebooks/modeling/models_nltk.ipynb)
+- [Resultados após TF-IDF](https://github.com/guialbquerque/AnaliseDeSentimentosIMDB/blob/main/notebooks/modeling/models_tfidf.ipynb)
+
 
 
 
